@@ -1,5 +1,5 @@
 // Library
-import React, {Component} from 'react';
+import React from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import User from '../../../User';
@@ -7,7 +7,7 @@ import User from '../../../User';
 // Styles
 import {text, font, margin, flex, styles} from '../Styles';
 
-export default class Home extends Component {
+export default class Home extends React.Component {
   constructor() {
     super();
     this.state = {};

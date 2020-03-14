@@ -1,11 +1,6 @@
 import React from 'react';
-import {
-  ActivityIndicator,
-  AsyncStorage,
-  StatusBar,
-  StyleSheet,
-  View,
-} from 'react-native';
+import {ActivityIndicator, StatusBar, StyleSheet, View} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import User from '../../../User';
 
