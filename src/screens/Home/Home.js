@@ -69,7 +69,11 @@ export default class Home extends React.Component {
             }
             style={{width: 50, height: 50}}
           />
-          <Text>{item.name}</Text>
+          <Text>
+            {item.name}
+            {'\n'}
+            <Text>{item.phone}</Text>
+          </Text>
         </TouchableOpacity>
       </View>
     );

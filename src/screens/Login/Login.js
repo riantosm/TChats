@@ -57,7 +57,7 @@ export default class App extends React.Component {
       firebase
         .database()
         .ref('users/' + User.phone)
-        .set({name: this.state.name});
+        .update({name: this.state.name});
       this.props.navigation.navigate('App');
     }
   };

@@ -207,7 +207,7 @@ export default class Chat extends Component {
                   ]}>
                   <View>
                     <Text style={[styles.text.white, styles.text.textCenter]}>
-                      S
+                      Send
                     </Text>
                   </View>
                 </TouchableOpacity>
