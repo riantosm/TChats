@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
 import firebase from 'firebase';
 
 import User from '../../../User';
@@ -16,8 +15,11 @@ import User from '../../../User';
 import styles from '../Styles';
 
 export default class Home extends React.Component {
-  static navigationOptions = {
-    title: 'Chats',
+  static navigationOptions = ({navigation}) => {
+    return {
+      title: 'Chats',
+      // headerRight: <Text>a</Text>,
+    };
   };
 
   constructor() {
@@ -46,11 +48,6 @@ export default class Home extends React.Component {
     });
   }
 
-  logout = async () => {
-    await AsyncStorage.clear();
-    this.props.navigation.navigate('Auth');
-  };
-
   randerRow = ({item}, i) => {
     return (
       <View style={[styles.border.color.gray, styles.border.bottom[1]]}>
@@ -78,10 +75,9 @@ export default class Home extends React.Component {
           />
         </View>
         <View style={styles.margin.top[50]}>
-          <Text>Home {User.phone}</Text>
           <View>
             <TouchableOpacity
-              onPress={() => this.logout()}
+              onPress={() => this.props.navigation.navigate('Profile')}
               style={[
                 styles.bg.purple,
                 styles.shadow.sm,
@@ -90,7 +86,7 @@ export default class Home extends React.Component {
               ]}>
               <View>
                 <Text style={[styles.text.white, styles.text.textCenter]}>
-                  Sign out
+                  Profile
                 </Text>
               </View>
             </TouchableOpacity>
