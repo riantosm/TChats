@@ -15,11 +15,8 @@ import User from '../../../User';
 import styles from '../Styles';
 
 export default class Home extends React.Component {
-  static navigationOptions = ({navigation}) => {
-    return {
-      title: 'Chats',
-      // headerRight: <Text>a</Text>,
-    };
+  static navigationOptions = {
+    headerShown: false,
   };
 
   constructor() {
@@ -30,9 +27,7 @@ export default class Home extends React.Component {
     };
   }
 
-  componentDidMount() {}
-
-  UNSAFE_componentWillMount() {
+  componentDidMount() {
     this.state.dbRef.ref('users').on('child_added', val => {
       let person = val.val();
       person.phone = val.key;
@@ -47,6 +42,12 @@ export default class Home extends React.Component {
       }
     });
   }
+
+  componentWillUnmount() {
+    this.state.dbRef.ref('users').off();
+  }
+
+  UNSAFE_componentWillMount() {}
 
   randerRow = ({item}, i) => {
     return (

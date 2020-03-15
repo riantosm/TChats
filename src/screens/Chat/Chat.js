@@ -2,12 +2,16 @@
 import React, {Component} from 'react';
 import {
   Text,
-  SafeAreaView,
+  KeyboardAvoidingView,
   View,
   TextInput,
   TouchableOpacity,
   FlatList,
   Dimensions,
+  Animated,
+  Platform,
+  Keyboard,
+  AvoidingView,
 } from 'react-native';
 import firebase from 'firebase';
 
@@ -15,6 +19,8 @@ import User from '../../../User';
 
 // Styles
 import styles from '../Styles';
+
+const isIOS = Platform.OS === 'ios';
 
 export default class Chat extends Component {
   static navigationOptions = ({navigation}) => {
@@ -35,14 +41,22 @@ export default class Chat extends Component {
         phone: props.navigation.getParam('phone'),
       },
       textMessage: '',
-      dbRef: firebase.database(),
       messageList: [],
+      dbRef: firebase.database(),
     };
+    this.keyboardHeight = new Animated.Value(0);
+    this.bottomPadding = new Animated.Value(80);
   }
 
-  componentDidMount() {}
-
-  UNSAFE_componentWillMount() {
+  componentDidMount() {
+    this.keyboardShowListener = Keyboard.addListener(
+      isIOS ? 'keyboardWillShow' : 'keyboardDidShow',
+      e => this.keyboardEvent(e, true),
+    );
+    this.keyboardHideListener = Keyboard.addListener(
+      isIOS ? 'keyboardWillHide' : 'keyboardDidHide',
+      e => this.keyboardEvent(e, false),
+    );
     this.state.dbRef
       .ref('messages')
       .child(User.phone)
@@ -55,6 +69,29 @@ export default class Chat extends Component {
         });
       });
   }
+
+  componentWillUnmount() {
+    this.state.dbRef.ref('messages').off();
+    this.keyboardShowListener.remove();
+    this.keyboardHideListener.remove();
+  }
+
+  // UNSAFE_componentWillMount() {}
+
+  keyboardEvent = (event, isShow) => {
+    let heightOS = isIOS ? 140 : 80; //kolom text pass naik keyboard
+    let bottomOS = isIOS ? 140 : 155; //jarak flat list kebawah ketika keyboard open
+    Animated.parallel([
+      Animated.timing(this.keyboardHeight, {
+        duration: event.duration,
+        toValue: isShow ? heightOS : 0, //kolom text pass turun keyboard
+      }),
+      Animated.timing(this.bottomPadding, {
+        duration: event.duration,
+        toValue: isShow ? bottomOS : 75,
+      }),
+    ]).start();
+  };
 
   handleChange = key => val => {
     this.setState({[key]: val});
@@ -85,12 +122,12 @@ export default class Chat extends Component {
         from: User.phone,
       };
       updates[
-        'messages/' + User.phone + '/' + this.state.person.phone + '/' + msgId
+        User.phone + '/' + this.state.person.phone + '/' + msgId
       ] = message;
       updates[
-        'messages/' + this.state.person.phone + '/' + User.phone + '/' + msgId
+        this.state.person.phone + '/' + User.phone + '/' + msgId
       ] = message;
-      this.state.dbRef.ref().update(updates);
+      this.state.dbRef.ref('messages/').update(updates);
       this.setState({textMessage: ''});
     }
   };
@@ -135,20 +172,17 @@ export default class Chat extends Component {
     let {height} = Dimensions.get('window');
     return (
       <>
-        <SafeAreaView>
-          <FlatList
-            style={[styles.margin.vertical[20], {height: height * 0.75}]}
-            ref={ref => (this.flatList = ref)}
-            data={this.state.messageList}
-            renderItem={this.renderRow}
-            keyExtractor={(item, index) => index.toString()}
-          />
-          <View style={styles.custom.contentBottom}>
+        <KeyboardAvoidingView behavior="height" style={{flex: 1}}>
+          <Animated.View
+            style={[
+              styles.custom.contentBottom,
+              {bottom: this.keyboardHeight},
+            ]}>
             <View
               style={[
-                styles.container.top,
                 styles.flex.directionRow,
                 styles.flex.justify,
+                styles.padding.top[10],
                 styles.padding.horizontal[20],
               ]}>
               <TextInput
@@ -179,8 +213,22 @@ export default class Chat extends Component {
                 </TouchableOpacity>
               </View>
             </View>
-          </View>
-        </SafeAreaView>
+          </Animated.View>
+          <FlatList
+            style={[{height: height}]}
+            onContentSizeChange={() =>
+              this.flatList.scrollToEnd({animated: true})
+            }
+            onLayout={() => this.flatList.scrollToEnd({animated: true})}
+            ref={ref => (this.flatList = ref)}
+            data={this.state.messageList}
+            renderItem={this.renderRow}
+            keyExtractor={(item, index) => index.toString()}
+            ListFooterComponent={
+              <Animated.View style={{height: this.bottomPadding}} />
+            }
+          />
+        </KeyboardAvoidingView>
       </>
     );
   }

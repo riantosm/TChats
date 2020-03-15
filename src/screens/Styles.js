@@ -6,7 +6,15 @@ const style = {
   custom: StyleSheet.create({
     btn: {paddingHorizontal: 50, paddingVertical: 15},
     btnSend: {paddingVertical: 15, alignItems: 'center'},
-    contentBottom: {height: 100},
+    contentBottom: {
+      height: 75,
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      right: 0,
+      zIndex: 2,
+      backgroundColor: '#f2f2f2',
+    },
 
     boxChat: {
       flexDirection: 'row',
