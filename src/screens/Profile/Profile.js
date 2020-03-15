@@ -7,9 +7,11 @@ import {
   TouchableOpacity,
   Image,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import firebase from 'firebase';
+import ImagePicker from 'react-native-image-picker';
 
 import User from '../../../User';
 
@@ -21,6 +23,10 @@ export default class Profile extends Component {
     super();
     this.state = {
       name: User.name,
+      imageSource: User.image
+        ? {uri: User.image}
+        : require('../../../assets/img/new_user.png'),
+      upload: false,
     };
   }
 
@@ -51,19 +57,91 @@ export default class Profile extends Component {
       .database()
       .ref('users')
       .child(User.phone)
-      .set({name: this.state.name});
+      .set(User);
     Alert.alert('Saved');
+  };
+
+  changeImage = () => {
+    const options = {
+      quality: 0.7,
+      allowsEditing: true,
+      mediaType: 'photo',
+      noData: true,
+      storageOptions: {
+        skipBackup: true,
+        waitUntilSaved: true,
+        path: 'images',
+        cameraRoll: true,
+      },
+    };
+    ImagePicker.showImagePicker(options, response => {
+      if (response.error) {
+        console.log(error);
+      } else {
+        this.setState(
+          {
+            upload: true,
+            imageSource: {uri: response.uri},
+          },
+          this.uploadFile,
+        );
+      }
+    });
+  };
+
+  updateUserImage = imageUrl => {
+    User.image = imageUrl;
+    this.updateUser();
+    this.setState({upload: false, imageSource: {uri: imageUrl}});
+  };
+
+  uploadFile = async () => {
+    const file = await this.uriToBlob(this.state.imageSource.uri);
+    firebase
+      .storage()
+      .ref(`profile_pictures/${User.phone}.png`)
+      .put(file)
+      .then(snapshot => snapshot.ref.getDownloadURL())
+      .then(url => this.updateUserImage(url))
+      .catch(error => {
+        this.setState({
+          imageSource: require('../../../assets/img/new_user.png'),
+          upload: false,
+        });
+        Alert.alert('error upload');
+      });
+  };
+
+  uriToBlob = uri => {
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.onload = function() {
+        resolve(xhr.response);
+      };
+
+      xhr.onerror = function() {
+        reject(new Error('Error on upload image'));
+      };
+
+      xhr.responseType = 'blob';
+      xhr.open('GET', uri, true);
+      xhr.send(null);
+    });
   };
 
   render() {
     return (
       <>
         <View style={[styles.container.top, styles.padding.vertical[70]]}>
-          <TouchableOpacity>
-            <Image
-              style={[styles.width.normal[100], styles.height.normal[100]]}
-              source={require('../../../assets/img/new_user.png')}
-            />
+          <TouchableOpacity onPress={() => this.changeImage()}>
+            {this.state.upload ? (
+              <ActivityIndicator size="large" />
+            ) : (
+              <Image
+                style={[styles.width.normal[100], styles.height.normal[100]]}
+                source={this.state.imageSource}
+              />
+            )}
           </TouchableOpacity>
           <Text style={styles.margin.top[20]}>{User.phone}</Text>
           <TextInput

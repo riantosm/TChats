@@ -1,6 +1,7 @@
 const User = {
-  phone: '',
-  name: '',
+  phone: null,
+  name: null,
+  image: null,
 };
 
 export default User;

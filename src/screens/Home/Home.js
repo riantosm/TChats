@@ -5,6 +5,7 @@ import {
   View,
   FlatList,
   TouchableOpacity,
+  Image,
   SafeAreaView,
 } from 'react-native';
 import firebase from 'firebase';
@@ -33,6 +34,7 @@ export default class Home extends React.Component {
       person.phone = val.key;
       if (person.phone === User.phone) {
         User.name = person.name;
+        User.image = person.image ? person.image : null;
       } else {
         this.setState(prevState => {
           return {
@@ -58,7 +60,15 @@ export default class Home extends React.Component {
             // this.findName(item);
             // Alert.alert(item.phone);
           }}
-          style={[styles.padding.padding[20]]}>
+          style={[styles.padding.padding[20], styles.flex.directionRow]}>
+          <Image
+            source={
+              item.image
+                ? {uri: item.image}
+                : require('../../../assets/img/new_user.png')
+            }
+            style={{width: 50, height: 50}}
+          />
           <Text>{item.name}</Text>
         </TouchableOpacity>
       </View>
