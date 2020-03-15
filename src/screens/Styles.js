@@ -4,7 +4,20 @@ const {StyleSheet} = React;
 
 const style = {
   custom: StyleSheet.create({
-    btn: {paddingHorizontal: 50, paddingVertical: 15, width: 'auto'},
+    btn: {paddingHorizontal: 50, paddingVertical: 15},
+    btnSend: {paddingVertical: 15, alignItems: 'center'},
+    contentBottom: {height: 100},
+
+    boxChat: {
+      flexDirection: 'row',
+      maxWidth: '60%',
+      alignSelf: 'flex-start',
+    },
+
+    boxLeft: {alignSelf: 'flex-start'},
+    boxRight: {alignSelf: 'flex-end'},
+    textLeft: {textAlign: 'left'},
+    textRight: {textAlign: 'right'},
 
     boxStyleRight: {
       borderTopLeftRadius: 5,
@@ -19,10 +32,6 @@ const style = {
       borderBottomLeftRadius: 5,
     },
     input: {
-      borderWidth: 1,
-      width: '90%',
-      marginBottom: 10,
-      borderRadius: 5,
       borderColor: '#eee',
       backgroundColor: '#fff',
       paddingVertical: 10,
@@ -36,6 +45,15 @@ const style = {
       justifyContent: 'center',
       alignItems: 'center',
     },
+    top: {
+      flex: 1,
+      alignItems: 'center',
+    },
+  }),
+
+  flex: StyleSheet.create({
+    directionRow: {flexDirection: 'row'},
+    justify: {justifyContent: 'space-between'},
   }),
 
   bg: StyleSheet.create({
@@ -61,10 +79,6 @@ const style = {
     weight: {fontWeight: 'bold'},
   }),
 
-  flex: StyleSheet.create({
-    directionRow: {flexDirection: 'row'},
-  }),
-
   shadow: StyleSheet.create({
     sm: {
       shadowColor: '#000',
@@ -76,6 +90,17 @@ const style = {
       shadowRadius: 3.84,
 
       elevation: 2,
+    },
+    md: {
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 2,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+
+      elevation: 5,
     },
   }),
 
@@ -201,6 +226,7 @@ const style = {
       100: {margin: 100},
     }),
     vertical: StyleSheet.create({
+      5: {marginVertical: 5},
       10: {marginVertical: 10},
       20: {marginVertical: 20},
       30: {marginVertical: 30},
@@ -273,26 +299,34 @@ const style = {
       100: {marginRight: 100},
     }),
   },
-  // padding: {
-  //   padding: StyleSheet.create({
-  //     10: {padding: 10},
-  //     20: {padding: 20},
-  //   }),
-  //   horizontal: StyleSheet.create({
-  //     10: {paddingHorizontal: 10},
-  //     20: {paddingHorizontal: 20},
-  //   }),
-  // },
-  // bg: StyleSheet.create({
-  //   purple: {backgroundColor: '#5a52a5'},
-  // }),
+
+  width: {
+    percent: StyleSheet.create({
+      10: {width: '10%'},
+      20: {width: '20%'},
+      30: {width: '30%'},
+      40: {width: '40%'},
+      50: {width: '50%'},
+      60: {width: '60%'},
+      70: {width: '70%'},
+      75: {width: '75%'},
+      80: {width: '80%'},
+      90: {width: '90%'},
+      100: {width: '100%'},
+    }),
+    normal: StyleSheet.create({
+      10: {width: 10},
+      20: {width: 20},
+      30: {width: 30},
+      40: {width: 40},
+      50: {width: 50},
+      60: {width: 60},
+      70: {width: 70},
+      80: {width: 80},
+      90: {width: 90},
+      100: {width: 100},
+    }),
+  },
 };
 
 export default style;
-
-// export const styles = StyleSheet.create({
-//   bgPurple: {backgroundColor: '#5a52a5'},
-//   padding: {padding: 20},
-//   paddingHorizontal: {paddingHorizontal: 20},
-//   paddingVertical: {paddingVertical: 20},
-// });

@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
+  Dimensions,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import firebase from 'firebase';
@@ -13,7 +14,9 @@ import firebase from 'firebase';
 import User from '../../../User';
 
 // Styles
-import {text, font, margin, padding, flex, shadow, styles} from '../Styles';
+import styles from '../Styles';
+
+let deviceHeight = Dimensions.get('window').height;
 
 export default class App extends React.Component {
   static navigationOptions = {
@@ -63,26 +66,48 @@ export default class App extends React.Component {
     return (
       <>
         <ScrollView>
-          <View style={[styles.container, {minHeight: 600}]}>
-            <View style={margin.vertical50}>
+          <View style={[styles.container.center, {minHeight: deviceHeight}]}>
+            <View style={[styles.margin.vertical[50]]}>
               <Text
-                style={[text.purple, text.center, font.weight, font.size50]}>
+                style={[
+                  styles.text.purple,
+                  styles.text.center,
+                  styles.font.weight,
+                  styles.font.size50,
+                ]}>
                 TChat.ID
               </Text>
-              <Text style={[text.gray, text.center, font.size15]}>
+              <Text
+                style={[
+                  styles.text.gray,
+                  styles.text.center,
+                  styles.font.size15,
+                ]}>
                 Chat Application With Live Location
               </Text>
             </View>
             <TextInput
               placeholder="Phone"
-              style={[styles.input, shadow.sm, styles.boxStyleRight]}
+              style={[
+                styles.custom.input,
+                styles.shadow.sm,
+                styles.custom.boxStyleRight,
+                styles.width.percent[90],
+                styles.margin.bottom[10],
+              ]}
               value={this.state.phone}
               onChangeText={this.handleChange('phone')}
               keyboardType={'number-pad'}
             />
             <TextInput
               placeholder="Name"
-              style={[styles.input, shadow.sm, styles.boxStyleRight]}
+              style={[
+                styles.custom.input,
+                styles.shadow.sm,
+                styles.custom.boxStyleRight,
+                styles.width.percent[90],
+                styles.margin.bottom[10],
+              ]}
               value={this.state.name}
               onChangeText={this.handleChange('name')}
             />
@@ -90,23 +115,30 @@ export default class App extends React.Component {
               <TouchableOpacity
                 onPress={() => this.submitForm()}
                 style={[
-                  styles.bgPurple,
-                  shadow.sm,
-                  styles.boxStyleRight,
-                  styles.btn,
-                  margin.top20,
+                  styles.bg.purple,
+                  styles.shadow.md,
+                  styles.custom.boxStyleRight,
+                  styles.custom.btn,
+                  styles.margin.top[20],
                 ]}>
                 <View>
-                  <Text style={[text.white, styles.textCenter, shadow.sm]}>
+                  <Text style={[styles.text.white, styles.text.center]}>
                     Sign in
                   </Text>
                 </View>
               </TouchableOpacity>
             </View>
-            <View style={[margin.top20, margin.bottom50, flex.directionRow]}>
-              <Text style={text.gray}>Don't have account? </Text>
+            <View
+              style={[
+                styles.margin.top[20],
+                styles.margin.bottom[50],
+                styles.flex.directionRow,
+              ]}>
+              <Text style={styles.text.gray}>Don't have account? </Text>
               <TouchableOpacity>
-                <Text style={[text.purple, font.weight]}>Sign up</Text>
+                <Text style={[styles.text.purple, styles.font.weight]}>
+                  Sign up
+                </Text>
               </TouchableOpacity>
             </View>
           </View>

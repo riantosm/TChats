@@ -69,32 +69,34 @@ export default class Home extends React.Component {
 
   render() {
     return (
-      <SafeAreaView>
-        {/* <View style={styles.container}> */}
-        <FlatList
-          data={this.state.users}
-          renderItem={this.randerRow}
-          keyExtractor={item => item.phone}
-        />
+      <View style={styles.container.top}>
+        <View style={styles.width.percent[100]}>
+          <FlatList
+            data={this.state.users}
+            renderItem={this.randerRow}
+            keyExtractor={item => item.phone}
+          />
+        </View>
         <View style={styles.margin.top[50]}>
           <Text>Home {User.phone}</Text>
-          <TouchableOpacity
-            onPress={() => this.logout()}
-            style={[
-              styles.bg.purple,
-              styles.shadow.sm,
-              styles.custom.boxStyleRight,
-              styles.custom.btn,
-            ]}>
-            <View>
-              <Text style={[styles.text.white, styles.text.textCenter]}>
-                Sign out
-              </Text>
-            </View>
-          </TouchableOpacity>
+          <View>
+            <TouchableOpacity
+              onPress={() => this.logout()}
+              style={[
+                styles.bg.purple,
+                styles.shadow.sm,
+                styles.custom.boxStyleRight,
+                styles.custom.btn,
+              ]}>
+              <View>
+                <Text style={[styles.text.white, styles.text.textCenter]}>
+                  Sign out
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
-        {/* </View> */}
-      </SafeAreaView>
+      </View>
     );
   }
 }
