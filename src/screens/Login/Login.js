@@ -8,15 +8,18 @@ import {
   ScrollView,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import firebase from 'firebase';
+
 import User from '../../../User';
 
 // Styles
-import {text, font, margin, flex, styles} from '../Styles';
+import {text, font, margin, padding, flex, shadow, styles} from '../Styles';
 
 export default class App extends React.Component {
   static navigationOptions = {
     headerShown: false,
   };
+
   constructor() {
     super();
     this.state = {
@@ -48,10 +51,10 @@ export default class App extends React.Component {
       // alert(this.state.phone + '\n' + this.state.name);
       await AsyncStorage.setItem('userPhone', this.state.phone);
       User.phone = this.state.phone;
-      // firebase
-      //   .database()
-      //   .ref('users/' + User.phone)
-      //   .set({name: this.state.name});
+      firebase
+        .database()
+        .ref('users/' + User.phone)
+        .set({name: this.state.name});
       this.props.navigation.navigate('App');
     }
   };
@@ -72,14 +75,14 @@ export default class App extends React.Component {
             </View>
             <TextInput
               placeholder="Phone"
-              style={[styles.input, styles.shadow, styles.boxStyleRight]}
+              style={[styles.input, shadow.sm, styles.boxStyleRight]}
               value={this.state.phone}
               onChangeText={this.handleChange('phone')}
               keyboardType={'number-pad'}
             />
             <TextInput
               placeholder="Name"
-              style={[styles.input, styles.shadow, styles.boxStyleRight]}
+              style={[styles.input, shadow.sm, styles.boxStyleRight]}
               value={this.state.name}
               onChangeText={this.handleChange('name')}
             />
@@ -88,13 +91,13 @@ export default class App extends React.Component {
                 onPress={() => this.submitForm()}
                 style={[
                   styles.bgPurple,
-                  styles.shadow,
+                  shadow.sm,
                   styles.boxStyleRight,
                   styles.btn,
                   margin.top20,
                 ]}>
                 <View>
-                  <Text style={[text.white, styles.textCenter, styles.shadow]}>
+                  <Text style={[text.white, styles.textCenter, shadow.sm]}>
                     Sign in
                   </Text>
                 </View>
