@@ -26,6 +26,58 @@ const style = {
       justifyContent: 'space-between',
     },
 
+    map: {
+      ...StyleSheet.absoluteFill,
+    },
+    carousel: {
+      position: 'absolute',
+      bottom: 0,
+      marginBottom: 30,
+    },
+    cardContainer: {
+      alignSelf: 'center',
+      height: 70,
+      width: 70,
+      padding: 5,
+      borderRadius: 10,
+    },
+    cardContainerTitle: {
+      backgroundColor: 'rgba(90, 82, 165,1)',
+      height: 20,
+      width: 70,
+      top: 0,
+      position: 'absolute',
+      borderTopLeftRadius: 10,
+      borderTopRightRadius: 10,
+      alignSelf: 'center',
+      textAlign: 'center',
+      padding: 4,
+    },
+    cardTitle: {
+      color: '#fff',
+      fontSize: 10,
+    },
+    cardImage: {
+      height: 50,
+      width: 70,
+      bottom: 0,
+      position: 'absolute',
+      borderBottomLeftRadius: 10,
+      borderBottomRightRadius: 10,
+    },
+    network: {
+      borderRadius: 100,
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignSelf: 'center',
+      tintColor: '#fff',
+      width: 60,
+      height: 60,
+      position: 'absolute',
+      bottom: 120,
+      zIndex: 100,
+    },
+
     btn: {paddingHorizontal: 50, paddingVertical: 15},
     btnSend: {paddingVertical: 15, alignItems: 'center'},
     contentBottom: {
@@ -146,6 +198,7 @@ const style = {
   }),
 
   font: StyleSheet.create({
+    size8: {fontSize: 8},
     size12: {fontSize: 12},
     size15: {fontSize: 15},
     size20: {fontSize: 20},

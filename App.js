@@ -10,10 +10,12 @@ import Home from './src/screens/Home/Home';
 import AuthLoadingScreen from './src/screens/AuthLoadingScreen/AuthLoadingScreen';
 import Chat from './src/screens/Chat/Chat';
 import Profile from './src/screens/Profile/Profile';
+import Map from './src/screens/Map/Map';
 
 const AppStack = createStackNavigator({
   Home: Home,
   Chat: Chat,
+  Map: Map,
   Profile: Profile,
 });
 const AuthStack = createStackNavigator({Login: Login});

@@ -170,7 +170,7 @@ export default class Profile extends Component {
                   styles.custom.boxMenu,
                   styles.shadow.md,
                 ]}
-                onPress={() => this.props.navigation.navigate('Maps')}>
+                onPress={() => this.props.navigation.navigate('Map')}>
                 <View>
                   <Image
                     source={require('../../../assets/img/location.png')}
