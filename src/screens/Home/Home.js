@@ -7,7 +7,9 @@ import {
   TouchableOpacity,
   Image,
   SafeAreaView,
+  ScrollView,
 } from 'react-native';
+import {Fab, Button, Icon} from 'native-base';
 import firebase from 'firebase';
 
 import User from '../../../User';
@@ -25,6 +27,7 @@ export default class Home extends React.Component {
     this.state = {
       dbRef: firebase.database(),
       users: [],
+      active: false,
     };
   }
 
@@ -53,61 +56,172 @@ export default class Home extends React.Component {
 
   randerRow = ({item}, i) => {
     return (
-      <View style={[styles.border.color.gray, styles.border.bottom[1]]}>
-        <TouchableOpacity
-          onPress={() => {
-            this.props.navigation.navigate('Chat', item);
-            // this.findName(item);
-            // Alert.alert(item.phone);
-          }}
-          style={[styles.padding.padding[20], styles.flex.directionRow]}>
-          <Image
-            source={
-              item.image
-                ? {uri: item.image}
-                : require('../../../assets/img/new_user.png')
-            }
-            style={{width: 50, height: 50}}
-          />
-          <Text>
-            {item.name}
-            {'\n'}
-            <Text>{item.phone}</Text>
-          </Text>
-        </TouchableOpacity>
-      </View>
+      <>
+        <View style={[styles.width.percent[90], styles.align.self]}>
+          <TouchableOpacity
+            style={[styles.margin.vertical[10]]}
+            onPress={() => this.props.navigation.navigate('Chat', item)}>
+            <View
+              style={[
+                styles.custom.boxStyleRight,
+                styles.bg.white,
+                styles.shadow.sm,
+                styles.flex.directionRow,
+                styles.padding.padding[20],
+              ]}>
+              <Image
+                source={
+                  item.image
+                    ? {uri: item.image}
+                    : require('../../../assets/img/new_user.png')
+                }
+                style={[styles.custom.imgFriend, styles.custom.boxStyleRight]}
+              />
+              <View
+                style={[styles.padding.horizontal[10], styles.container.left]}>
+                <Text
+                  style={[
+                    styles.font.size15,
+                    styles.text.purple,
+                    styles.font.weight,
+                  ]}>
+                  {item.name}
+                </Text>
+                <Text style={[styles.text.gray]}>{item.phone}</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+        </View>
+      </>
     );
   };
 
   render() {
     return (
-      <View style={styles.container.top}>
-        <View style={styles.width.percent[100]}>
-          <FlatList
-            data={this.state.users}
-            renderItem={this.randerRow}
-            keyExtractor={item => item.phone}
-          />
-        </View>
-        <View style={styles.margin.top[50]}>
-          <View>
-            <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('Profile')}
-              style={[
-                styles.bg.purple,
-                styles.shadow.sm,
-                styles.custom.boxStyleRight,
-                styles.custom.btn,
-              ]}>
-              <View>
-                <Text style={[styles.text.white, styles.text.textCenter]}>
-                  Profile
-                </Text>
-              </View>
-            </TouchableOpacity>
+      <>
+        <ScrollView>
+          <View
+            style={[styles.custom.header, styles.bg.purple, styles.shadow.md]}>
+            <Text style={styles.custom.title}>T-chat</Text>
+            <View style={styles.custom.menu}>
+              <TouchableOpacity
+                style={[
+                  styles.custom.boxStyleRight,
+                  styles.custom.boxMenu,
+                  styles.shadow.md,
+                ]}
+                onPress={() => this.props.navigation.navigate('Home')}>
+                <View>
+                  <Image
+                    source={require('../../../assets/img/friends.png')}
+                    style={[
+                      styles.custom.imgIcon,
+                      styles.align.self,
+                      styles.custom.boxStyleLeft,
+                      {borderRadius: 10},
+                    ]}
+                  />
+                  <Text
+                    style={[
+                      styles.text.purple,
+                      styles.text.center,
+                      styles.font.weight,
+                    ]}>
+                    Friends
+                  </Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.custom.boxStyleMid,
+                  styles.custom.boxMenu,
+                  styles.shadow.md,
+                ]}
+                onPress={() => this.props.navigation.navigate('Maps')}>
+                <View>
+                  <Image
+                    source={require('../../../assets/img/location.png')}
+                    style={[styles.custom.imgIcon, styles.align.self]}
+                  />
+                  <Text
+                    style={[
+                      styles.text.purple,
+                      styles.text.center,
+                      styles.font.weight,
+                    ]}>
+                    Maps
+                  </Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.custom.boxStyleLeft,
+                  styles.custom.boxMenu,
+                  styles.shadow.md,
+                ]}
+                onPress={() => this.props.navigation.navigate('Profile')}>
+                <View>
+                  <Image
+                    source={require('../../../assets/img/user.png')}
+                    style={[styles.custom.imgIcon, styles.align.self]}
+                  />
+                  <Text
+                    style={[
+                      styles.text.purple,
+                      styles.text.center,
+                      styles.font.weight,
+                    ]}>
+                    Profile
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-      </View>
+          <View style={[styles.custom.body, styles.container.top]}>
+            <View style={styles.width.percent[100]}>
+              <FlatList
+                data={this.state.users}
+                renderItem={this.randerRow}
+                keyExtractor={item => item.phone}
+              />
+            </View>
+          </View>
+        </ScrollView>
+        <Fab
+          active={this.state.active}
+          direction="up"
+          containerStyle={{}}
+          style={styles.bg.purple}
+          position="bottomRight"
+          onPress={() => this.setState({active: !this.state.active})}>
+          <View>
+            <Image
+              source={require('../../../assets/img/network.png')}
+              style={[styles.custom.imgIconSm, styles.align.self]}
+            />
+            <Text
+              style={[
+                styles.text.white,
+                styles.font.size12,
+                styles.text.center,
+              ]}>
+              Confirm / Add
+            </Text>
+          </View>
+          <Button style={{backgroundColor: '#3B5998'}}>
+            <Image
+              source={require('../../../assets/img/user.png')}
+              style={styles.custom.imgIconSm}
+            />
+          </Button>
+          <Button style={{backgroundColor: '#34A34F'}}>
+            <Image
+              source={require('../../../assets/img/add-user.png')}
+              style={styles.custom.imgIconSm}
+            />
+          </Button>
+        </Fab>
+      </>
     );
   }
 }

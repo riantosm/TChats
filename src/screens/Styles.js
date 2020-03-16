@@ -4,6 +4,28 @@ const {StyleSheet} = React;
 
 const style = {
   custom: StyleSheet.create({
+    header: {
+      // backgroundColor: '#736cba',
+      // backgroundColor: '#5a52a5',
+      height: 120,
+      zIndex: 100,
+    },
+    title: {
+      color: '#fff',
+      fontWeight: 'bold',
+      fontSize: 40,
+      textAlign: 'center',
+      paddingVertical: 20,
+    },
+    menu: {
+      position: 'absolute',
+      marginTop: 85,
+      width: '100%',
+      flexDirection: 'row',
+      paddingHorizontal: 20,
+      justifyContent: 'space-between',
+    },
+
     btn: {paddingHorizontal: 50, paddingVertical: 15},
     btnSend: {paddingVertical: 15, alignItems: 'center'},
     contentBottom: {
@@ -14,6 +36,11 @@ const style = {
       right: 0,
       zIndex: 2,
       backgroundColor: '#f2f2f2',
+    },
+
+    imgFriend: {
+      width: 50,
+      height: 50,
     },
 
     boxChat: {
@@ -27,6 +54,14 @@ const style = {
     textLeft: {textAlign: 'left'},
     textRight: {textAlign: 'right'},
 
+    boxMenu: {
+      backgroundColor: '#fff',
+      width: '28%',
+      height: 70,
+      alignSelf: 'center',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
     boxStyleRight: {
       borderTopLeftRadius: 5,
       borderTopRightRadius: 15,
@@ -38,6 +73,28 @@ const style = {
       borderTopRightRadius: 5,
       borderBottomRightRadius: 15,
       borderBottomLeftRadius: 5,
+    },
+    boxStyleMid: {
+      borderTopRightRadius: 5,
+      borderTopLeftRadius: 5,
+      borderBottomLeftRadius: 15,
+      borderBottomRightRadius: 15,
+      zIndex: 100,
+    },
+    imgIcon: {
+      width: 30,
+      height: 30,
+      tintColor: '#736cba',
+    },
+    imgIconSm: {
+      width: 20,
+      height: 20,
+      tintColor: '#fff',
+    },
+    body: {
+      marginVertical: 50,
+      // paddingHorizontal: 20,
+      minWidth: '100%',
     },
     input: {
       // borderColor: '#eee',
@@ -53,10 +110,19 @@ const style = {
       justifyContent: 'center',
       alignItems: 'center',
     },
+    left: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'flex-start',
+    },
     top: {
       flex: 1,
       alignItems: 'center',
     },
+  }),
+
+  align: StyleSheet.create({
+    self: {alignSelf: 'center'},
   }),
 
   flex: StyleSheet.create({
@@ -80,6 +146,7 @@ const style = {
   }),
 
   font: StyleSheet.create({
+    size12: {fontSize: 12},
     size15: {fontSize: 15},
     size20: {fontSize: 20},
     size40: {fontSize: 40},

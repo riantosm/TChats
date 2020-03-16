@@ -8,6 +8,7 @@ import {
   Image,
   Alert,
   ActivityIndicator,
+  ScrollView,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import firebase from 'firebase';
@@ -19,6 +20,10 @@ import User from '../../../User';
 import styles from '../Styles';
 
 export default class Profile extends Component {
+  static navigationOptions = {
+    headerShown: false,
+  };
+
   constructor() {
     super();
     this.state = {
@@ -132,60 +137,134 @@ export default class Profile extends Component {
   render() {
     return (
       <>
-        <View style={[styles.container.top, styles.padding.vertical[70]]}>
-          <TouchableOpacity onPress={() => this.changeImage()}>
-            {this.state.upload ? (
-              <ActivityIndicator size="large" />
-            ) : (
-              <Image
-                style={[styles.width.normal[100], styles.height.normal[100]]}
-                source={this.state.imageSource}
-              />
-            )}
-          </TouchableOpacity>
-          <Text style={styles.margin.top[20]}>{User.phone}</Text>
-          <TextInput
-            value={this.state.name}
-            onChangeText={this.handleChange('name')}
-            style={[
-              styles.custom.input,
-              styles.width.percent[90],
-              styles.custom.boxStyleRight,
-              styles.shadow.sm,
-              styles.margin.top[10],
-            ]}
-          />
-          <TouchableOpacity
-            onPress={() => this.changeName()}
-            style={[
-              styles.bg.purple,
-              styles.shadow.sm,
-              styles.custom.boxStyleRight,
-              styles.custom.btn,
-              styles.margin.top[50],
-            ]}>
-            <View>
-              <Text style={[styles.text.white, styles.text.textCenter]}>
-                Change Name
-              </Text>
+        <ScrollView>
+          <View
+            style={[styles.custom.header, styles.bg.purple, styles.shadow.md]}>
+            <Text style={styles.custom.title}>T-chat</Text>
+            <View style={styles.custom.menu}>
+              <TouchableOpacity
+                style={[
+                  styles.custom.boxStyleRight,
+                  styles.custom.boxMenu,
+                  styles.shadow.md,
+                ]}
+                onPress={() => this.props.navigation.navigate('Home')}>
+                <View>
+                  <Image
+                    source={require('../../../assets/img/friends.png')}
+                    style={[styles.custom.imgIcon, styles.align.self]}
+                  />
+                  <Text
+                    style={[
+                      styles.text.purple,
+                      styles.text.center,
+                      styles.font.weight,
+                    ]}>
+                    Friends
+                  </Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.custom.boxStyleMid,
+                  styles.custom.boxMenu,
+                  styles.shadow.md,
+                ]}
+                onPress={() => this.props.navigation.navigate('Maps')}>
+                <View>
+                  <Image
+                    source={require('../../../assets/img/location.png')}
+                    style={[styles.custom.imgIcon, styles.align.self]}
+                  />
+                  <Text
+                    style={[
+                      styles.text.purple,
+                      styles.text.center,
+                      styles.font.weight,
+                    ]}>
+                    Maps
+                  </Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.custom.boxStyleLeft,
+                  styles.custom.boxMenu,
+                  styles.shadow.md,
+                ]}
+                onPress={() => this.props.navigation.navigate('Profile')}>
+                <View>
+                  <Image
+                    source={require('../../../assets/img/user.png')}
+                    style={[styles.custom.imgIcon, styles.align.self]}
+                  />
+                  <Text
+                    style={[
+                      styles.text.purple,
+                      styles.text.center,
+                      styles.font.weight,
+                    ]}>
+                    Profile
+                  </Text>
+                </View>
+              </TouchableOpacity>
             </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => this.logout()}
-            style={[
-              styles.bg.purple,
-              styles.shadow.sm,
-              styles.custom.boxStyleRight,
-              styles.custom.btn,
-              styles.margin.vertical[50],
-            ]}>
-            <View>
-              <Text style={[styles.text.white, styles.text.textCenter]}>
-                Sign out
-              </Text>
-            </View>
-          </TouchableOpacity>
-        </View>
+          </View>
+          <View style={[styles.container.top, styles.padding.vertical[70]]}>
+            <TouchableOpacity onPress={() => this.changeImage()}>
+              {this.state.upload ? (
+                <ActivityIndicator size="large" />
+              ) : (
+                <Image
+                  style={[styles.width.normal[100], styles.height.normal[100]]}
+                  source={this.state.imageSource}
+                />
+              )}
+            </TouchableOpacity>
+            <Text style={styles.margin.top[20]}>{User.phone}</Text>
+            <TextInput
+              value={this.state.name}
+              onChangeText={this.handleChange('name')}
+              style={[
+                styles.custom.input,
+                styles.width.percent[90],
+                styles.custom.boxStyleRight,
+                styles.shadow.sm,
+                styles.margin.top[10],
+              ]}
+            />
+            <TouchableOpacity
+              onPress={() => this.changeName()}
+              style={[
+                styles.bg.purple,
+                styles.shadow.sm,
+                styles.custom.boxStyleRight,
+                styles.custom.btn,
+                styles.margin.top[20],
+              ]}>
+              <View>
+                <Text style={[styles.text.white, styles.text.textCenter]}>
+                  Change Name
+                </Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.logout()}
+              style={[
+                styles.bg.purple,
+                styles.shadow.sm,
+                styles.custom.boxStyleRight,
+                styles.custom.btn,
+                styles.margin.vertical[50],
+              ]}>
+              <View>
+                <Text style={[styles.text.white, styles.text.textCenter]}>
+                  Sign out
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
       </>
     );
   }
