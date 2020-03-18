@@ -216,7 +216,11 @@ export default class Profile extends Component {
                 <ActivityIndicator size="large" />
               ) : (
                 <Image
-                  style={[styles.width.normal[100], styles.height.normal[100]]}
+                  style={[
+                    styles.width.normal[100],
+                    styles.height.normal[100],
+                    styles.custom.boxStyleRight,
+                  ]}
                   source={this.state.imageSource}
                 />
               )}
