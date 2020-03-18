@@ -102,7 +102,7 @@ export default class Home extends React.Component {
         <ScrollView>
           <View
             style={[styles.custom.header, styles.bg.purple, styles.shadow.md]}>
-            <Text style={styles.custom.title}>T-chat</Text>
+            <Text style={styles.custom.title}>TChat.ID</Text>
             <View style={styles.custom.menu}>
               <TouchableOpacity
                 style={[
@@ -196,16 +196,16 @@ export default class Home extends React.Component {
           onPress={() => this.setState({active: !this.state.active})}>
           <View>
             <Image
-              source={require('../../../assets/img/network.png')}
+              source={require('../../../assets/img/add-user.png')}
               style={[styles.custom.imgIconSm, styles.align.self]}
             />
             <Text
               style={[
                 styles.text.white,
-                styles.font.size12,
+                styles.font.size8,
                 styles.text.center,
               ]}>
-              Confirm / Add
+              Add Friends
             </Text>
           </View>
           <Button style={{backgroundColor: '#3B5998'}}>

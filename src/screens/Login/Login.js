@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import firebase from 'firebase';
+import Config from 'react-native-config';
 
 import User from '../../../User';
 
@@ -31,7 +32,9 @@ export default class App extends React.Component {
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    console.warn(Config.COLOR);
+  }
 
   handleChange = key => val => {
     this.setState({[key]: val});
@@ -83,7 +86,7 @@ export default class App extends React.Component {
                   styles.text.center,
                   styles.font.size15,
                 ]}>
-                Chat Application With Live Location
+                Chat Application Featured Live Location
               </Text>
             </View>
             <TextInput

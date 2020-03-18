@@ -189,7 +189,7 @@ export default class Map extends Component {
         <View style={{flex: 1}}>
           <View
             style={[styles.custom.header, styles.bg.purple, styles.shadow.md]}>
-            <Text style={styles.custom.title}>T-chat</Text>
+            <Text style={styles.custom.title}>TChat.ID</Text>
             <View style={styles.custom.menu}>
               <TouchableOpacity
                 style={[

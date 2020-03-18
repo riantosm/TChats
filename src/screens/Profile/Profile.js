@@ -140,7 +140,7 @@ export default class Profile extends Component {
         <ScrollView>
           <View
             style={[styles.custom.header, styles.bg.purple, styles.shadow.md]}>
-            <Text style={styles.custom.title}>T-chat</Text>
+            <Text style={styles.custom.title}>TChat.ID</Text>
             <View style={styles.custom.menu}>
               <TouchableOpacity
                 style={[
