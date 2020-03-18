@@ -27,11 +27,61 @@ export default class Home extends React.Component {
     this.state = {
       dbRef: firebase.database(),
       users: [],
+      friends: [],
+      friendsPhone: [],
+      friendsRequest: [],
       active: false,
     };
   }
 
   componentDidMount() {
+    this.getUserAll();
+    this.getUserMyFriend();
+    this.getUserMyRequest();
+  }
+
+  cek() {
+    // for (let x = 1; x <= this.state.friends.length; x++) {
+    //   x--;
+    //   if (this.state.friends[x]['status'] === '2') {
+    //     // console.warn(this.state.friends[x]['phone']);
+    //     // this.setState({
+    //     //   friendsPhone: this.state.friends[x]['phone'],
+    //     // });
+    //     this.setState(prevState => {
+    //       return {
+    //         friendsPhone: [
+    //           ...prevState.friendsPhone,
+    //           this.state.friends[x]['phone'],
+    //         ],
+    //       };
+    //     });
+    //   }
+    //   x++;
+    // }
+
+    // for (let x = 1; x <= this.state.users.length; x++) {
+    //   x--;
+    //   for (let y = 1; y <= this.state.friends.length; y++) {
+    //     y--;
+    //     if (this.state.users[x]['phone'] === this.state.friends[y]['phone']) {
+    //       console.log(
+    //         this.state.users[x]['phone'],
+    //         ' dan ',
+    //         this.state.friends[y]['phone'],
+    //       );
+    //     }
+    //     y++;
+    //   }
+    //   x++;
+    // }
+
+    console.log(this.state.friends.length);
+    // console.warn(this.state.friends[0]['status']);
+    // console.warn(this.state.users[0]['phone']);
+  }
+
+  getUserAll() {
     this.state.dbRef.ref('users').on('child_added', val => {
       let person = val.val();
       person.phone = val.key;
@@ -49,52 +99,130 @@ export default class Home extends React.Component {
     });
   }
 
+  getUserMyFriend() {
+    this.state.dbRef
+      .ref('friend')
+      .child(User.phone)
+      .on('child_added', val => {
+        let person = val.val();
+        person.phone = val.key;
+        // if (person.phone === User.phone) {
+        //   User.name = person.name;
+        //   User.password = person.password;
+        //   User.image = person.image ? person.image : null;
+        // } else {
+        if (person['status'] === '2') {
+          this.setState(prevState => {
+            return {
+              friends: [...prevState.friends, person],
+            };
+          });
+        }
+        // }
+      });
+  }
+
+  getUserMyRequest() {
+    this.state.dbRef
+      .ref('friend')
+      .child(User.phone)
+      .on('child_added', val => {
+        let person = val.val();
+        person.phone = val.key;
+        // if (person.phone === User.phone) {
+        //   User.name = person.name;
+        //   User.password = person.password;
+        //   User.image = person.image ? person.image : null;
+        // } else {
+        if (person['status'] === '1') {
+          console.log(person);
+          this.setState(prevState => {
+            return {
+              friendsRequest: [...prevState.friends, person],
+            };
+          });
+        }
+        // }
+      });
+  }
+
   componentWillUnmount() {
     this.state.dbRef.ref('users').off();
+    this.state.dbRef.ref('friend').off();
   }
 
   UNSAFE_componentWillMount() {}
 
-  randerRow = ({item}, i) => {
-    return (
-      <>
-        <View style={[styles.width.percent[90], styles.align.self]}>
-          <TouchableOpacity
-            style={[styles.margin.vertical[10]]}
-            onPress={() => this.props.navigation.navigate('Chat', item)}>
-            <View
-              style={[
-                styles.custom.boxStyleRight,
-                styles.bg.white,
-                styles.shadow.sm,
-                styles.flex.directionRow,
-                styles.padding.padding[20],
-              ]}>
-              <Image
-                source={
-                  item.image
-                    ? {uri: item.image}
-                    : require('../../../assets/img/new_user.png')
-                }
-                style={[styles.custom.imgFriend, styles.custom.boxStyleRight]}
-              />
-              <View
-                style={[styles.padding.horizontal[10], styles.container.left]}>
-                <Text
+  randerRow = ({item, index}) => {
+    // for (let x = 1; x <= this.state.friends.length; x++) {
+    //   console.warn(this.state.users[x]);
+    //   console.warn('----');
+    // }
+
+    // console.log(item['phone']);
+    // console.log(this.state.friends[0]);
+
+    // this.state.friends[index]
+    //   ? (item['phone'] == this.state.friends[index]['phone']
+    //       ? console.log('sama')
+    //       : console.log('tidak'),
+    //     console.log(this.state.friends[index]['phone']),
+    //     console.log(this.state.friends[index]))
+    //   : console.log();
+
+    // let text = this.state.friends[0]['phone'];
+    // console.log(this.state.friends[0]['phone']);
+    for (let y = 1; y <= this.state.friends.length; y++) {
+      y--;
+      if (this.state.users[index]['phone'] === this.state.friends[y]['phone']) {
+        return (
+          <>
+            <View style={[styles.width.percent[90], styles.align.self]}>
+              <TouchableOpacity
+                style={[styles.margin.vertical[10]]}
+                onPress={() => this.props.navigation.navigate('Chat', item)}>
+                <View
                   style={[
-                    styles.font.size15,
-                    styles.text.purple,
-                    styles.font.weight,
+                    styles.custom.boxStyleRight,
+                    styles.bg.white,
+                    styles.shadow.sm,
+                    styles.flex.directionRow,
+                    styles.padding.padding[20],
                   ]}>
-                  {item.name}
-                </Text>
-                <Text style={[styles.text.gray]}>{item.phone}</Text>
-              </View>
+                  <Image
+                    source={
+                      item.image
+                        ? {uri: item.image}
+                        : require('../../../assets/img/new_user.png')
+                    }
+                    style={[
+                      styles.custom.imgFriend,
+                      styles.custom.boxStyleRight,
+                    ]}
+                  />
+                  <View
+                    style={[
+                      styles.padding.horizontal[10],
+                      styles.container.left,
+                    ]}>
+                    <Text
+                      style={[
+                        styles.font.size15,
+                        styles.text.purple,
+                        styles.font.weight,
+                      ]}>
+                      {item.name}
+                    </Text>
+                    <Text style={[styles.text.gray]}>{item.phone}</Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
             </View>
-          </TouchableOpacity>
-        </View>
-      </>
-    );
+          </>
+        );
+      }
+      y++;
+    }
   };
 
   render() {
@@ -180,11 +308,58 @@ export default class Home extends React.Component {
           </View>
           <View style={[styles.custom.body, styles.container.top]}>
             <View style={styles.width.percent[100]}>
-              <FlatList
-                data={this.state.users}
-                renderItem={this.randerRow}
-                keyExtractor={item => item.phone}
-              />
+              {this.state.friends.length > 0 ? (
+                <FlatList
+                  data={this.state.users}
+                  renderItem={this.randerRow}
+                  keyExtractor={item => item.phone}
+                  ListEmptyComponent={
+                    <>
+                      <View
+                        style={[
+                          styles.flex.directionRow,
+                          styles.align.self,
+                          styles.margin.vertical[50],
+                        ]}>
+                        <Text style={styles.text.purple}>
+                          You no have friends, please{' '}
+                        </Text>
+                        <TouchableOpacity>
+                          <Text
+                            style={[styles.text.purple, styles.font.weight]}>
+                            add here
+                          </Text>
+                        </TouchableOpacity>
+                      </View>
+                    </>
+                  }
+                />
+              ) : (
+                <View
+                  style={[
+                    styles.flex.directionRow,
+                    styles.align.self,
+                    styles.margin.vertical[50],
+                  ]}>
+                  <Text style={styles.text.purple}>
+                    You no have friends, please{' '}
+                  </Text>
+                  <TouchableOpacity
+                    onPress={() =>
+                      this.props.navigation.navigate('AddFriends', {
+                        users: this.state.users,
+                      })
+                    }>
+                    <Text style={[styles.text.purple, styles.font.weight]}>
+                      add here
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+
+              <TouchableOpacity onPress={() => this.cek()}>
+                <Text style={styles.text.center}>cek</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </ScrollView>
@@ -209,13 +384,26 @@ export default class Home extends React.Component {
               Add Friends
             </Text>
           </View>
-          <Button style={{backgroundColor: '#3B5998'}}>
+          <Button
+            style={{backgroundColor: '#3B5998'}}
+            onPress={() =>
+              this.props.navigation.navigate('WaitingFriends', {
+                usersA: this.state.users,
+                usersR: this.state.friendsRequest,
+              })
+            }>
             <Image
               source={require('../../../assets/img/user.png')}
               style={styles.custom.imgIconSm}
             />
           </Button>
-          <Button style={{backgroundColor: '#34A34F'}}>
+          <Button
+            style={{backgroundColor: '#34A34F'}}
+            onPress={() =>
+              this.props.navigation.navigate('AddFriends', {
+                users: this.state.users,
+              })
+            }>
             <Image
               source={require('../../../assets/img/add-user.png')}
               style={styles.custom.imgIconSm}

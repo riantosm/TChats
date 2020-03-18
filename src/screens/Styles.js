@@ -167,6 +167,11 @@ const style = {
       justifyContent: 'center',
       alignItems: 'flex-start',
     },
+    right: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'flex-end',
+    },
     top: {
       flex: 1,
       alignItems: 'center',
@@ -268,6 +273,7 @@ const style = {
     }),
     vertical: StyleSheet.create({
       10: {paddingVertical: 10},
+      15: {paddingVertical: 15},
       20: {paddingVertical: 20},
       30: {paddingVertical: 30},
       40: {paddingVertical: 40},

@@ -30,6 +30,7 @@ export default class Login extends React.Component {
       phone: '',
       password: '',
       warn: '',
+      login: false,
     };
   }
 
@@ -40,6 +41,7 @@ export default class Login extends React.Component {
       phone: '',
       password: '',
       warn: '',
+      login: false,
     });
   }
 
@@ -83,10 +85,17 @@ export default class Login extends React.Component {
             User.phone = this.state.phone;
             this.props.navigation.navigate('App');
           } else {
-            this.setState({warn: 'Incorrect phone number or password!'});
+            this.setState({
+              warn: 'Incorrect phone number or password!',
+              login: true,
+            });
           }
         });
-      this.setState({warn: 'Incorrect phone number or password!'});
+      if (this.state.login) {
+        this.setState({warn: 'Incorrect phone number or password!'});
+      } else {
+        await AsyncStorage.setItem('userPhone', this.state.phone);
+      }
     }
   };
 
