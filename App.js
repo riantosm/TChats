@@ -11,6 +11,7 @@ import AuthLoadingScreen from './src/screens/AuthLoadingScreen/AuthLoadingScreen
 import Chat from './src/screens/Chat/Chat';
 import Profile from './src/screens/Profile/Profile';
 import Map from './src/screens/Map/Map';
+import Register from './src/screens/Register/Register';
 
 const AppStack = createStackNavigator({
   Home: Home,
@@ -18,7 +19,7 @@ const AppStack = createStackNavigator({
   Map: Map,
   Profile: Profile,
 });
-const AuthStack = createStackNavigator({Login: Login});
+const AuthStack = createStackNavigator({Login: Login, Register: Register});
 
 export default createAppContainer(
   createSwitchNavigator(

@@ -19,7 +19,7 @@ import styles from '../Styles';
 
 let deviceHeight = Dimensions.get('window').height;
 
-export default class Login extends React.Component {
+export default class Register extends React.Component {
   static navigationOptions = {
     headerShown: false,
   };
@@ -28,20 +28,12 @@ export default class Login extends React.Component {
     super();
     this.state = {
       phone: '',
+      name: '',
       password: '',
-      warn: '',
     };
   }
 
   componentDidMount() {}
-
-  handleCancel() {
-    this.setState({
-      phone: '',
-      password: '',
-      warn: '',
-    });
-  }
 
   handleChange = key => val => {
     this.setState({[key]: val});
@@ -56,37 +48,19 @@ export default class Login extends React.Component {
   }
 
   submitForm = async () => {
-    if (this.state.phone.length < 1) {
-      this.setState({warn: 'Please enter the phone number and password!'});
-    } else if (this.state.password.length < 1) {
-      this.setState({warn: 'Please enter the phone number and password!'});
+    if (this.state.phone.length < 3) {
+      alert('Error,Phone must < 3');
+    } else if (this.state.name.length < 3) {
+      alert('Error,Name must < 3');
     } else {
-      // alert(this.state.phone + '\n' + this.state.name);
+      Alert.alert('Register successful');
       // await AsyncStorage.setItem('userPhone', this.state.phone);
-      // firebase
-      //   .database()
-      //   .ref('users/' + User.phone)
-      //   .update({name: this.state.name});
-      // this.props.navigation.navigate('App');
+      User.phone = this.state.phone;
       firebase
         .database()
-        .ref('users')
-        .child(this.state.phone)
-        .on('child_added', value => {
-          // this.setState(prevState => {
-          //   return {
-          //     thisUser: [...prevState.thisUser, value.val()],
-          //   };
-          // });
-          if (this.state.password === value.val()) {
-            // console.log(value.val());
-            User.phone = this.state.phone;
-            this.props.navigation.navigate('App');
-          } else {
-            this.setState({warn: 'Incorrect phone number or password!'});
-          }
-        });
-      this.setState({warn: 'Incorrect phone number or password!'});
+        .ref('users/' + User.phone)
+        .update({name: this.state.name, password: this.state.password});
+      this.props.navigation.navigate('Login');
     }
   };
 
@@ -128,6 +102,18 @@ export default class Login extends React.Component {
               keyboardType={'number-pad'}
             />
             <TextInput
+              placeholder="Name"
+              style={[
+                styles.custom.input,
+                styles.shadow.sm,
+                styles.custom.boxStyleRight,
+                styles.width.percent[90],
+                styles.margin.bottom[10],
+              ]}
+              value={this.state.name}
+              onChangeText={this.handleChange('name')}
+            />
+            <TextInput
               placeholder="Password"
               style={[
                 styles.custom.input,
@@ -140,14 +126,6 @@ export default class Login extends React.Component {
               onChangeText={this.handleChange('password')}
               secureTextEntry={true}
             />
-            <Text
-              style={[
-                styles.margin.top[10],
-                styles.text.purple,
-                styles.font.weight,
-              ]}>
-              {this.state.warn}
-            </Text>
             <View>
               <TouchableOpacity
                 onPress={() => this.submitForm()}
@@ -160,7 +138,7 @@ export default class Login extends React.Component {
                 ]}>
                 <View>
                   <Text style={[styles.text.white, styles.text.center]}>
-                    Sign in
+                    Submit
                   </Text>
                 </View>
               </TouchableOpacity>
@@ -171,14 +149,11 @@ export default class Login extends React.Component {
                 styles.margin.bottom[50],
                 styles.flex.directionRow,
               ]}>
-              <Text style={styles.text.gray}>Don't have account? </Text>
+              <Text style={styles.text.gray}></Text>
               <TouchableOpacity
-                onPress={() => {
-                  this.handleCancel();
-                  this.props.navigation.navigate('Register');
-                }}>
+                onPress={() => this.props.navigation.navigate('Login')}>
                 <Text style={[styles.text.purple, styles.font.weight]}>
-                  Sign up
+                  Back
                 </Text>
               </TouchableOpacity>
             </View>

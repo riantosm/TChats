@@ -62,7 +62,7 @@ export default class Profile extends Component {
       .database()
       .ref('users')
       .child(User.phone)
-      .set(User);
+      .update(User);
     Alert.alert('Saved');
   };
 
@@ -80,8 +80,12 @@ export default class Profile extends Component {
       },
     };
     ImagePicker.showImagePicker(options, response => {
-      if (response.error) {
-        console.log(error);
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
       } else {
         this.setState(
           {

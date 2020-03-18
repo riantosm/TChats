@@ -37,6 +37,7 @@ export default class Home extends React.Component {
       person.phone = val.key;
       if (person.phone === User.phone) {
         User.name = person.name;
+        User.password = person.password;
         User.image = person.image ? person.image : null;
       } else {
         this.setState(prevState => {
