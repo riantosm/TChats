@@ -428,6 +428,7 @@ export default class Home extends React.Component {
             onPress={() =>
               this.props.navigation.navigate('AddFriends', {
                 users: this.state.users,
+                friends: this.state.friends,
               })
             }>
             <Image

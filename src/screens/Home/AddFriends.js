@@ -33,28 +33,48 @@ export default class AddFriends extends Component {
     this.state = {
       searchPhone: '',
       userAll: props.navigation.getParam('users'),
+      userFriends: props.navigation.getParam('friends'),
       userSearch: [],
       searchPhoneFind: false,
+      isFriend: false,
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    // console.log(this.state.userFriends);
+  }
 
   handleChange = key => val => {
     this.setState({[key]: val});
   };
 
   handleSubmit() {
+    let friend = this.state.userFriends;
     let search = this.state.userAll;
+
+    friend = friend
+      .filter(item => item.phone == this.state.searchPhone)
+      .map(({name, phone}) => ({name, phone}));
 
     search = search
       .filter(item => item.phone == this.state.searchPhone)
       .map(({image, name, phone}) => ({image, name, phone}));
 
-    this.setState({
-      userSearch: search,
-      searchPhoneFind: true,
-    });
+    console.log(friend);
+
+    if (friend[0] === undefined) {
+      this.setState({
+        userSearch: search,
+        searchPhoneFind: true,
+        isFriend: false,
+      });
+    } else {
+      this.setState({
+        userSearch: search,
+        searchPhoneFind: true,
+        isFriend: true,
+      });
+    }
   }
 
   addFriend = async phoneSrch => {
@@ -118,21 +138,39 @@ export default class AddFriends extends Component {
               </View>
               <View
                 style={[styles.padding.horizontal[10], styles.container.right]}>
-                <TouchableOpacity
-                  onPress={() => this.addFriend(item.phone)}
-                  style={[
-                    styles.bg.purple,
-                    styles.shadow.sm,
-                    styles.custom.boxStyleRight,
-                    styles.padding.vertical[10],
-                    styles.padding.horizontal[20],
-                  ]}>
-                  <View>
-                    <Text style={[styles.text.white, styles.text.center]}>
-                      Add
-                    </Text>
-                  </View>
-                </TouchableOpacity>
+                {this.state.isFriend ? (
+                  <TouchableOpacity
+                    onPress={() => this.props.navigation.navigate('Chat', item)}
+                    style={[
+                      styles.bg.purple,
+                      styles.shadow.sm,
+                      styles.custom.boxStyleRight,
+                      styles.padding.vertical[10],
+                      styles.padding.horizontal[20],
+                    ]}>
+                    <View>
+                      <Text style={[styles.text.white, styles.text.center]}>
+                        Chat
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                ) : (
+                  <TouchableOpacity
+                    onPress={() => this.addFriend(item.phone)}
+                    style={[
+                      styles.bg.purple,
+                      styles.shadow.sm,
+                      styles.custom.boxStyleRight,
+                      styles.padding.vertical[10],
+                      styles.padding.horizontal[20],
+                    ]}>
+                    <View>
+                      <Text style={[styles.text.white, styles.text.center]}>
+                        Add
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                )}
               </View>
             </View>
           </View>
