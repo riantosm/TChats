@@ -38,7 +38,7 @@ const style = {
     carousel: {
       position: 'absolute',
       bottom: 0,
-      marginBottom: 30,
+      marginBottom: 20,
     },
     cardContainer: {
       alignSelf: 'center',
@@ -67,8 +67,8 @@ const style = {
       fontSize: 10,
     },
     cardImage: {
-      height: 100,
-      width: 100,
+      height: 50,
+      width: 50,
     },
     network: {
       borderRadius: 100,
@@ -362,6 +362,7 @@ const style = {
       20: {margin: 20},
       30: {margin: 30},
       40: {margin: 40},
+      45: {margin: 45},
       50: {margin: 50},
       60: {margin: 60},
       70: {margin: 70},
@@ -450,12 +451,14 @@ const style = {
       20: {width: '20%'},
       30: {width: '30%'},
       40: {width: '40%'},
+      45: {width: '45%'},
       50: {width: '50%'},
       60: {width: '60%'},
       70: {width: '70%'},
       75: {width: '75%'},
       80: {width: '80%'},
       90: {width: '90%'},
+      95: {width: '95%'},
       100: {width: '100%'},
     }),
     normal: StyleSheet.create({

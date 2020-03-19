@@ -8,6 +8,7 @@ import {
   Image,
   SafeAreaView,
   ScrollView,
+  StatusBar,
 } from 'react-native';
 import {Fab, Button, Icon} from 'native-base';
 import firebase from 'firebase';
@@ -237,6 +238,7 @@ export default class Home extends React.Component {
   render() {
     return (
       <>
+        <StatusBar backgroundColor="#5a52a5" barStyle="light-content" />
         <ScrollView>
           <View style={[styles.custom.header]}>
             <View style={[styles.bg.purple, {height: 120}]}>

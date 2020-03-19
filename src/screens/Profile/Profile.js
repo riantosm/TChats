@@ -9,6 +9,7 @@ import {
   Alert,
   ActivityIndicator,
   ScrollView,
+  StatusBar,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import firebase from 'firebase';
@@ -141,6 +142,7 @@ export default class Profile extends Component {
   render() {
     return (
       <>
+        <StatusBar backgroundColor="#5a52a5" barStyle="light-content" />
         <ScrollView>
           <View style={[styles.custom.header]}>
             <View style={[styles.bg.purple, {height: 120}]}>

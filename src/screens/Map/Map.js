@@ -5,6 +5,7 @@ import {
   View,
   TouchableOpacity,
   TouchableWithoutFeedback,
+  StatusBar,
   Image,
   Dimensions,
   Alert,
@@ -239,14 +240,11 @@ export default class Map extends Component {
         y--;
         if (this.state.coordinates[x]['phone'] === item.phone) {
           return (
-            <TouchableWithoutFeedback
-              onPress={() => {
-                this.onMakerPressed(this.state.coordinates[x], index);
-              }}>
+            <TouchableWithoutFeedback>
               <View style={[styles.custom.cardContainer]}>
                 <View
                   style={[
-                    styles.custom.boxStyleRight,
+                    styles.custom.boxStyleMid,
                     styles.padding.padding[20],
                     styles.margin.margin[10],
                     styles.bg.white,
@@ -285,32 +283,56 @@ export default class Map extends Component {
                       ]}>
                       {this.state.coordinates[x]['phone']}
                     </Text>
-
-                    <View style={[styles.container.top]}>
-                      <TouchableOpacity
-                        onPress={() =>
-                          this.props.navigation.navigate(
-                            'Chat',
-                            this.state.coordinates[x],
-                          )
-                        }
-                        style={[
-                          styles.bg.purple,
-                          styles.shadow.sm,
-                          styles.custom.boxStyleRight,
-                          styles.padding.vertical[15],
-                          styles.margin.top[10],
-                          styles.width.percent[60],
-                          styles.align.selfLeft,
-                        ]}>
-                        <View>
-                          <Text style={[styles.text.white, styles.text.center]}>
-                            Chat
-                          </Text>
-                        </View>
-                      </TouchableOpacity>
-                    </View>
                   </View>
+                </View>
+
+                <View
+                  style={[
+                    styles.container.top,
+                    styles.flex.directionRow,
+                    styles.width.percent[95],
+                  ]}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.onMakerPressed(this.state.coordinates[x], index);
+                    }}
+                    style={[
+                      styles.bg.purple,
+                      styles.shadow.md,
+                      styles.custom.boxStyleRight,
+                      styles.padding.vertical[15],
+                      styles.margin.margin[10],
+                      styles.width.percent[45],
+                      styles.align.selfLeft,
+                    ]}>
+                    <View>
+                      <Text style={[styles.text.white, styles.text.center]}>
+                        Location
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() =>
+                      this.props.navigation.navigate(
+                        'Chat',
+                        this.state.coordinates[x],
+                      )
+                    }
+                    style={[
+                      styles.bg.purple,
+                      styles.shadow.md,
+                      styles.custom.boxStyleLeft,
+                      styles.padding.vertical[15],
+                      styles.margin.margin[10],
+                      styles.width.percent[45],
+                      styles.align.selfLeft,
+                    ]}>
+                    <View>
+                      <Text style={[styles.text.white, styles.text.center]}>
+                        Chat
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
                 </View>
               </View>
             </TouchableWithoutFeedback>
@@ -325,8 +347,9 @@ export default class Map extends Component {
   render() {
     return (
       <>
+        <StatusBar backgroundColor="#5a52a5" barStyle="light-content" />
         <TouchableOpacity
-          style={[styles.custom.network, styles.bg.purple, styles.shadow.sm]}
+          style={[styles.custom.network, styles.bg.purple, styles.shadow.md]}
           onPress={() => {
             this.myMarker();
             this.updateMyLocation();
