@@ -39,6 +39,13 @@ const style = {
       height: 70,
       width: 70,
       padding: 5,
+      borderRadius: 50,
+    },
+    cardContainerHide: {
+      alignSelf: 'center',
+      height: 20,
+      width: 20,
+      padding: 5,
       borderRadius: 10,
     },
     cardContainerTitle: {

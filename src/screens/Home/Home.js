@@ -162,14 +162,6 @@ export default class Home extends React.Component {
       });
   }
 
-  componentWillUnmount() {
-    console.log('unmo');
-  }
-
-  UNSAFE_componentWillMount() {
-    console.log('willmo');
-  }
-
   randerRow = ({item, index}) => {
     // for (let x = 1; x <= this.state.friends.length; x++) {
     //   console.warn(this.state.users[x]);
@@ -283,7 +275,12 @@ export default class Home extends React.Component {
                   styles.custom.boxMenu,
                   styles.shadow.md,
                 ]}
-                onPress={() => this.props.navigation.navigate('Map')}>
+                onPress={() =>
+                  this.props.navigation.navigate('Map', {
+                    userFriends: this.state.friends,
+                    userAll: this.state.users,
+                  })
+                }>
                 <View>
                   <Image
                     source={require('../../../assets/img/location.png')}
