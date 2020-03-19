@@ -37,7 +37,9 @@ export default class WaitingFriends extends Component {
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    // console.log(this.state.userRequest);
+  }
 
   confirm = async phoneSrch => {
     console.log(phoneSrch);
@@ -54,8 +56,8 @@ export default class WaitingFriends extends Component {
       .database()
       .ref()
       .update(updates);
-    this.props.navigation.navigate('App');
-    Alert.alert(`Now you are friends with ${phoneSrch}.`);
+    this.props.navigation.navigate('Home', this.state.userRequest);
+    // Alert.alert(`Now you are friends with ${phoneSrch}.`);
   };
 
   randerRow = ({item, index}) => {
@@ -146,23 +148,34 @@ export default class WaitingFriends extends Component {
   render() {
     return (
       <View>
-        <FlatList
-          data={this.state.userAll}
-          renderItem={this.randerRow}
-          keyExtractor={item => item.phone}
-          ListEmptyComponent={
-            <>
-              <View
-                style={[
-                  styles.flex.directionRow,
-                  styles.align.self,
-                  styles.margin.vertical[50],
-                ]}>
-                <Text style={styles.text.purple}>No Request.</Text>
-              </View>
-            </>
-          }
-        />
+        {this.state.userRequest[0] == undefined ? (
+          <View
+            style={[
+              styles.flex.directionRow,
+              styles.align.self,
+              styles.margin.vertical[50],
+            ]}>
+            <Text style={styles.text.purple}>No Request.</Text>
+          </View>
+        ) : (
+          <FlatList
+            data={this.state.userAll}
+            renderItem={this.randerRow}
+            keyExtractor={item => item.phone}
+            ListEmptyComponent={
+              <>
+                <View
+                  style={[
+                    styles.flex.directionRow,
+                    styles.align.self,
+                    styles.margin.vertical[50],
+                  ]}>
+                  <Text style={styles.text.purple}>No Request.</Text>
+                </View>
+              </>
+            }
+          />
+        )}
       </View>
     );
   }

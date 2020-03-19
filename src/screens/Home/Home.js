@@ -22,8 +22,8 @@ export default class Home extends React.Component {
     headerShown: false,
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       dbRef: firebase.database(),
       users: [],
@@ -31,7 +31,12 @@ export default class Home extends React.Component {
       friendsPhone: [],
       friendsRequest: [],
       active: false,
+      thiss: props.navigation.getParam('par'),
     };
+  }
+
+  componentWillReceiveProps() {
+    this.cek();
   }
 
   componentDidMount() {
@@ -41,6 +46,16 @@ export default class Home extends React.Component {
   }
 
   cek() {
+    this.setState({
+      users: [],
+      friends: [],
+      friendsPhone: [],
+      friendsRequest: [],
+      active: false,
+    });
+    this.getUserAll();
+    this.getUserMyFriend();
+    this.getUserMyRequest();
     // for (let x = 1; x <= this.state.friends.length; x++) {
     //   x--;
     //   if (this.state.friends[x]['status'] === '2') {
@@ -76,7 +91,8 @@ export default class Home extends React.Component {
     //   x++;
     // }
 
-    console.log(this.state.friends.length);
+    // console.log(this.state.friends.length);
+
     // console.warn(this.state.friends[0]['status']);
     // console.warn(this.state.users[0]['phone']);
   }
@@ -138,7 +154,7 @@ export default class Home extends React.Component {
           console.log(person);
           this.setState(prevState => {
             return {
-              friendsRequest: [...prevState.friends, person],
+              friendsRequest: [...prevState.friendsRequest, person],
             };
           });
         }
@@ -147,11 +163,12 @@ export default class Home extends React.Component {
   }
 
   componentWillUnmount() {
-    this.state.dbRef.ref('users').off();
-    this.state.dbRef.ref('friend').off();
+    console.log('unmo');
   }
 
-  UNSAFE_componentWillMount() {}
+  UNSAFE_componentWillMount() {
+    console.log('willmo');
+  }
 
   randerRow = ({item, index}) => {
     // for (let x = 1; x <= this.state.friends.length; x++) {
@@ -357,8 +374,17 @@ export default class Home extends React.Component {
                 </View>
               )}
 
-              <TouchableOpacity onPress={() => this.cek()}>
-                <Text style={styles.text.center}>cek</Text>
+              <TouchableOpacity
+                onPress={() => this.cek()}
+                style={styles.margin.vertical[20]}>
+                <Text
+                  style={[
+                    styles.text.center,
+                    styles.text.purple,
+                    styles.font.weight,
+                  ]}>
+                  Refresh
+                </Text>
               </TouchableOpacity>
             </View>
           </View>
