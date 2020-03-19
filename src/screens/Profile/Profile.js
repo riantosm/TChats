@@ -142,9 +142,12 @@ export default class Profile extends Component {
     return (
       <>
         <ScrollView>
-          <View
-            style={[styles.custom.header, styles.bg.purple, styles.shadow.md]}>
-            <Text style={styles.custom.title}>TChat.ID</Text>
+          <View style={[styles.custom.header]}>
+            <View style={[styles.bg.purple, {height: 120}]}>
+              <View style={[styles.custom.headerBg, styles.shadow.md]}>
+                <Text style={styles.custom.title}>TChat.ID</Text>
+              </View>
+            </View>
             <View style={styles.custom.menu}>
               <TouchableOpacity
                 style={[
@@ -214,63 +217,65 @@ export default class Profile extends Component {
               </TouchableOpacity>
             </View>
           </View>
-          <View style={[styles.container.top, styles.padding.vertical[70]]}>
-            <TouchableOpacity onPress={() => this.changeImage()}>
-              {this.state.upload ? (
-                <ActivityIndicator size="large" />
-              ) : (
-                <Image
-                  style={[
-                    styles.width.normal[100],
-                    styles.height.normal[100],
-                    styles.custom.boxStyleRight,
-                  ]}
-                  source={this.state.imageSource}
-                />
-              )}
-            </TouchableOpacity>
-            <Text style={styles.margin.top[20]}>{User.phone}</Text>
-            <TextInput
-              value={this.state.name}
-              onChangeText={this.handleChange('name')}
-              style={[
-                styles.custom.input,
-                styles.width.percent[90],
-                styles.custom.boxStyleRight,
-                styles.shadow.sm,
-                styles.margin.top[10],
-              ]}
-            />
-            <TouchableOpacity
-              onPress={() => this.changeName()}
-              style={[
-                styles.bg.purple,
-                styles.shadow.sm,
-                styles.custom.boxStyleRight,
-                styles.custom.btn,
-                styles.margin.top[20],
-              ]}>
-              <View>
-                <Text style={[styles.text.white, styles.text.textCenter]}>
-                  Change Name
-                </Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => this.logout()}
-              style={[
-                styles.bg.purple,
-                styles.shadow.sm,
-                styles.custom.boxStyleRight,
-                styles.custom.btn,
-                styles.margin.vertical[50],
-              ]}>
-              <View>
-                <Text style={[styles.text.white, styles.text.textCenter]}>
-                  Sign out
-                </Text>
-              </View>
-            </TouchableOpacity>
+          <View style={[styles.custom.body, styles.padding.vertical[30]]}>
+            <View style={[styles.container.top]}>
+              <TouchableOpacity onPress={() => this.changeImage()}>
+                {this.state.upload ? (
+                  <ActivityIndicator size="large" />
+                ) : (
+                  <Image
+                    style={[
+                      styles.width.normal[100],
+                      styles.height.normal[100],
+                      styles.custom.boxStyleRight,
+                    ]}
+                    source={this.state.imageSource}
+                  />
+                )}
+              </TouchableOpacity>
+              <Text style={styles.margin.top[20]}>{User.phone}</Text>
+              <TextInput
+                value={this.state.name}
+                onChangeText={this.handleChange('name')}
+                style={[
+                  styles.custom.input,
+                  styles.width.percent[90],
+                  styles.custom.boxStyleRight,
+                  styles.shadow.sm,
+                  styles.margin.top[10],
+                ]}
+              />
+              <TouchableOpacity
+                onPress={() => this.changeName()}
+                style={[
+                  styles.bg.purple,
+                  styles.shadow.sm,
+                  styles.custom.boxStyleRight,
+                  styles.custom.btn,
+                  styles.margin.top[20],
+                ]}>
+                <View>
+                  <Text style={[styles.text.white, styles.text.textCenter]}>
+                    Change Name
+                  </Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => this.logout()}
+                style={[
+                  styles.bg.purple,
+                  styles.shadow.sm,
+                  styles.custom.boxStyleRight,
+                  styles.custom.btn,
+                  styles.margin.vertical[50],
+                ]}>
+                <View>
+                  <Text style={[styles.text.white, styles.text.textCenter]}>
+                    Sign out
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
           </View>
         </ScrollView>
       </>

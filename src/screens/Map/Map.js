@@ -97,7 +97,7 @@ export default class Map extends Component {
         if (
           this.state.coordinates[x]['phone'] === this.state.friends[y]['phone']
         ) {
-          console.log(this.state.coordinates[x]);
+          // console.log(this.state.coordinates[x]);
           this.setState(prevState => {
             return {
               users: [...prevState.users, this.state.coordinates],
@@ -108,7 +108,7 @@ export default class Map extends Component {
       }
       x++;
     }
-    console.log('user: ', this.state.users);
+    // console.log('user: ', this.state.users);
   }
 
   cek() {
@@ -243,16 +243,75 @@ export default class Map extends Component {
               onPress={() => {
                 this.onMakerPressed(this.state.coordinates[x], index);
               }}>
-              <View style={styles.custom.cardContainer}>
-                <Text style={styles.custom.cardContainerTitle}>
-                  <Text style={styles.custom.cardTitle}>
-                    {this.state.coordinates[x]['name']}
-                  </Text>
-                </Text>
-                <Image
-                  style={styles.custom.cardImage}
-                  source={{uri: this.state.coordinates[x].image}}
-                />
+              <View style={[styles.custom.cardContainer]}>
+                <View
+                  style={[
+                    styles.custom.boxStyleRight,
+                    styles.padding.padding[20],
+                    styles.margin.margin[10],
+                    styles.bg.white,
+                    styles.flex.directionRow,
+                    styles.shadow.md,
+                  ]}>
+                  <Image
+                    style={[
+                      styles.custom.cardImage,
+                      styles.custom.boxStyleRight,
+                      styles.shadow.md,
+                    ]}
+                    source={{uri: this.state.coordinates[x].image}}
+                  />
+                  <View
+                    style={[
+                      styles.width.percent[100],
+                      styles.padding.horizontal[20],
+                    ]}>
+                    <Text
+                      numberOfLines={1}
+                      style={[
+                        styles.font.size20,
+                        styles.text.purple,
+                        styles.font.weight,
+                        styles.width.percent[60],
+                      ]}>
+                      {this.state.coordinates[x]['name']}
+                    </Text>
+                    <Text
+                      numberOfLines={1}
+                      style={[
+                        styles.font.size15,
+                        styles.text.gray,
+                        styles.width.percent[60],
+                      ]}>
+                      {this.state.coordinates[x]['phone']}
+                    </Text>
+
+                    <View style={[styles.container.top]}>
+                      <TouchableOpacity
+                        onPress={() =>
+                          this.props.navigation.navigate(
+                            'Chat',
+                            this.state.coordinates[x],
+                          )
+                        }
+                        style={[
+                          styles.bg.purple,
+                          styles.shadow.sm,
+                          styles.custom.boxStyleRight,
+                          styles.padding.vertical[15],
+                          styles.margin.top[10],
+                          styles.width.percent[60],
+                          styles.align.selfLeft,
+                        ]}>
+                        <View>
+                          <Text style={[styles.text.white, styles.text.center]}>
+                            Chat
+                          </Text>
+                        </View>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                </View>
               </View>
             </TouchableWithoutFeedback>
           );
@@ -287,84 +346,82 @@ export default class Map extends Component {
             </Text>
           </View>
         </TouchableOpacity>
-        <View style={{flex: 1}}>
-          <View
-            style={[styles.custom.header, styles.bg.purple, styles.shadow.md]}>
-            <Text style={styles.custom.title}>TChat.ID</Text>
-            <View style={styles.custom.menu}>
-              <TouchableOpacity
-                style={[
-                  styles.custom.boxStyleRight,
-                  styles.custom.boxMenu,
-                  styles.shadow.md,
-                ]}
-                onPress={() => this.props.navigation.navigate('Home')}>
-                <View>
-                  <Image
-                    source={require('../../../assets/img/friends.png')}
-                    style={[
-                      styles.custom.imgIcon,
-                      styles.align.self,
-                      styles.custom.boxStyleLeft,
-                      {borderRadius: 10},
-                    ]}
-                  />
-                  <Text
-                    style={[
-                      styles.text.purple,
-                      styles.text.center,
-                      styles.font.weight,
-                    ]}>
-                    Friends
-                  </Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[
-                  styles.custom.boxStyleMid,
-                  styles.custom.boxMenu,
-                  styles.shadow.md,
-                ]}
-                onPress={() => this.props.navigation.navigate('Map')}>
-                <View>
-                  <Image
-                    source={require('../../../assets/img/location.png')}
-                    style={[styles.custom.imgIcon, styles.align.self]}
-                  />
-                  <Text
-                    style={[
-                      styles.text.purple,
-                      styles.text.center,
-                      styles.font.weight,
-                    ]}>
-                    Maps
-                  </Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[
-                  styles.custom.boxStyleLeft,
-                  styles.custom.boxMenu,
-                  styles.shadow.md,
-                ]}
-                onPress={() => this.props.navigation.navigate('Profile')}>
-                <View>
-                  <Image
-                    source={require('../../../assets/img/user.png')}
-                    style={[styles.custom.imgIcon, styles.align.self]}
-                  />
-                  <Text
-                    style={[
-                      styles.text.purple,
-                      styles.text.center,
-                      styles.font.weight,
-                    ]}>
-                    Profile
-                  </Text>
-                </View>
-              </TouchableOpacity>
+        <View style={[styles.custom.header]}>
+          <View style={[styles.bg.purple, {height: 120}]}>
+            <View style={[styles.custom.headerBg, styles.shadow.md]}>
+              <Text style={styles.custom.title}>TChat.ID</Text>
             </View>
           </View>
+          <View style={styles.custom.menu}>
+            <TouchableOpacity
+              style={[
+                styles.custom.boxStyleRight,
+                styles.custom.boxMenu,
+                styles.shadow.md,
+              ]}
+              onPress={() => this.props.navigation.navigate('Home')}>
+              <View>
+                <Image
+                  source={require('../../../assets/img/friends.png')}
+                  style={[styles.custom.imgIcon, styles.align.self]}
+                />
+                <Text
+                  style={[
+                    styles.text.purple,
+                    styles.text.center,
+                    styles.font.weight,
+                  ]}>
+                  Friends
+                </Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                styles.custom.boxStyleMid,
+                styles.custom.boxMenu,
+                styles.shadow.md,
+              ]}
+              onPress={() => this.props.navigation.navigate('Map')}>
+              <View>
+                <Image
+                  source={require('../../../assets/img/location.png')}
+                  style={[styles.custom.imgIcon, styles.align.self]}
+                />
+                <Text
+                  style={[
+                    styles.text.purple,
+                    styles.text.center,
+                    styles.font.weight,
+                  ]}>
+                  Maps
+                </Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                styles.custom.boxStyleLeft,
+                styles.custom.boxMenu,
+                styles.shadow.md,
+              ]}
+              onPress={() => this.props.navigation.navigate('Profile')}>
+              <View>
+                <Image
+                  source={require('../../../assets/img/user.png')}
+                  style={[styles.custom.imgIcon, styles.align.self]}
+                />
+                <Text
+                  style={[
+                    styles.text.purple,
+                    styles.text.center,
+                    styles.font.weight,
+                  ]}>
+                  Profile
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={{flex: 1}}>
           <MapView
             ref={map => (this._map = map)}
             provider={PROVIDER_GOOGLE}
@@ -410,8 +467,8 @@ export default class Map extends Component {
             renderItem={this.renderCarouseItem}
             sliderWidth={Dimensions.get('window').width}
             removeClippedSubviews={false}
-            itemWidth={Dimensions.get('window').width - 100}
-            onSnapToItem={index => this.onCarouselItemChange(index)}
+            itemWidth={Dimensions.get('window').width - 70}
+            // onSnapToItem={index => this.onCarouselItemChange(index)}
           />
         </View>
       </>

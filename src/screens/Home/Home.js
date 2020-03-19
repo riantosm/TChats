@@ -238,9 +238,12 @@ export default class Home extends React.Component {
     return (
       <>
         <ScrollView>
-          <View
-            style={[styles.custom.header, styles.bg.purple, styles.shadow.md]}>
-            <Text style={styles.custom.title}>TChat.ID</Text>
+          <View style={[styles.custom.header]}>
+            <View style={[styles.bg.purple, {height: 120}]}>
+              <View style={[styles.custom.headerBg, styles.shadow.md]}>
+                <Text style={styles.custom.title}>TChat.ID</Text>
+              </View>
+            </View>
             <View style={styles.custom.menu}>
               <TouchableOpacity
                 style={[
@@ -252,12 +255,7 @@ export default class Home extends React.Component {
                 <View>
                   <Image
                     source={require('../../../assets/img/friends.png')}
-                    style={[
-                      styles.custom.imgIcon,
-                      styles.align.self,
-                      styles.custom.boxStyleLeft,
-                      {borderRadius: 10},
-                    ]}
+                    style={[styles.custom.imgIcon, styles.align.self]}
                   />
                   <Text
                     style={[
@@ -275,12 +273,7 @@ export default class Home extends React.Component {
                   styles.custom.boxMenu,
                   styles.shadow.md,
                 ]}
-                onPress={() =>
-                  this.props.navigation.navigate('Map', {
-                    userFriends: this.state.friends,
-                    userAll: this.state.users,
-                  })
-                }>
+                onPress={() => this.props.navigation.navigate('Map')}>
                 <View>
                   <Image
                     source={require('../../../assets/img/location.png')}

@@ -7,8 +7,13 @@ const style = {
     header: {
       // backgroundColor: '#736cba',
       // backgroundColor: '#5a52a5',
+      height: 170,
+      position: 'absolute',
+      width: '100%',
+      zIndex: 99,
+    },
+    headerBg: {
       height: 120,
-      zIndex: 100,
     },
     title: {
       color: '#fff',
@@ -24,6 +29,7 @@ const style = {
       flexDirection: 'row',
       paddingHorizontal: 20,
       justifyContent: 'space-between',
+      zIndex: 100,
     },
 
     map: {
@@ -36,10 +42,7 @@ const style = {
     },
     cardContainer: {
       alignSelf: 'center',
-      height: 70,
-      width: 70,
-      padding: 5,
-      borderRadius: 50,
+      width: '100%',
     },
     cardContainerHide: {
       alignSelf: 'center',
@@ -49,7 +52,6 @@ const style = {
       borderRadius: 10,
     },
     cardContainerTitle: {
-      backgroundColor: 'rgba(90, 82, 165,1)',
       height: 20,
       width: 70,
       top: 0,
@@ -65,12 +67,8 @@ const style = {
       fontSize: 10,
     },
     cardImage: {
-      height: 50,
-      width: 70,
-      bottom: 0,
-      position: 'absolute',
-      borderBottomLeftRadius: 10,
-      borderBottomRightRadius: 10,
+      height: 100,
+      width: 100,
     },
     network: {
       borderRadius: 100,
@@ -81,7 +79,7 @@ const style = {
       width: 60,
       height: 60,
       position: 'absolute',
-      bottom: 120,
+      bottom: 200,
       zIndex: 100,
     },
 
@@ -120,6 +118,7 @@ const style = {
       alignSelf: 'center',
       alignItems: 'center',
       justifyContent: 'center',
+      zIndex: 100,
     },
     boxStyleRight: {
       borderTopLeftRadius: 5,
@@ -151,6 +150,7 @@ const style = {
       tintColor: '#fff',
     },
     body: {
+      marginTop: 170,
       marginVertical: 50,
       // paddingHorizontal: 20,
       minWidth: '100%',
@@ -187,6 +187,7 @@ const style = {
 
   align: StyleSheet.create({
     self: {alignSelf: 'center'},
+    selfLeft: {alignSelf: 'flex-start'},
   }),
 
   flex: StyleSheet.create({
@@ -214,6 +215,7 @@ const style = {
     size12: {fontSize: 12},
     size15: {fontSize: 15},
     size20: {fontSize: 20},
+    size25: {fontSize: 25},
     size40: {fontSize: 40},
     size50: {fontSize: 50},
     weight: {fontWeight: 'bold'},
@@ -355,6 +357,7 @@ const style = {
 
   margin: {
     margin: StyleSheet.create({
+      5: {margin: 5},
       10: {margin: 10},
       20: {margin: 20},
       30: {margin: 30},
