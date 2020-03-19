@@ -1,9 +1,17 @@
 import React from 'react';
-import {ActivityIndicator, StatusBar, StyleSheet, View} from 'react-native';
+import {
+  ActivityIndicator,
+  StatusBar,
+  StyleSheet,
+  View,
+  Image,
+} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import firebase from 'firebase';
 
 import User from '../../../User';
+
+import styles from '../Styles';
 
 class AuthLoadingScreen extends React.Component {
   constructor(props) {
@@ -39,10 +47,16 @@ class AuthLoadingScreen extends React.Component {
   // Render any loading content that you like here
   render() {
     return (
-      <View>
-        <ActivityIndicator />
-        <StatusBar barStyle="default" />
-      </View>
+      <>
+        <StatusBar backgroundColor="#5a52a5" barStyle="light-content" />
+        <View style={[styles.container.center, {backgroundColor: '#fff'}]}>
+          <Image
+            source={require('../../../assets/img/logo-tchat.png')}
+            style={[styles.width.normal[100], styles.height.normal[100]]}
+          />
+          <ActivityIndicator color="#5a52a5" />
+        </View>
+      </>
     );
   }
 }

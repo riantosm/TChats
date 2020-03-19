@@ -8,6 +8,7 @@ import {
   ScrollView,
   Dimensions,
   Alert,
+  Image,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import firebase from 'firebase';
@@ -30,6 +31,7 @@ export default class Register extends React.Component {
       phone: '',
       name: '',
       password: '',
+      warn: '',
     };
   }
 
@@ -48,11 +50,18 @@ export default class Register extends React.Component {
   }
 
   submitForm = async () => {
-    if (this.state.phone.length < 3) {
-      alert('Error,Phone must < 3');
+    if (this.state.phone.length < 10) {
+      this.setState({
+        warn: 'Invalid, Phone must > 10 character!',
+      });
     } else if (this.state.name.length < 3) {
-      alert('Error,Name must < 3');
+      this.setState({
+        warn: 'Invalid, Name must > 3 character!',
+      });
     } else {
+      this.setState({
+        warn: '',
+      });
       Alert.alert('Register successful');
       // await AsyncStorage.setItem('userPhone', this.state.phone);
       User.phone = this.state.phone;
@@ -70,6 +79,14 @@ export default class Register extends React.Component {
         <ScrollView>
           <View style={[styles.container.center, {minHeight: deviceHeight}]}>
             <View style={[styles.margin.vertical[50]]}>
+              <Image
+                source={require('../../../assets/img/logo-tchat.png')}
+                style={[
+                  styles.width.normal[100],
+                  styles.height.normal[100],
+                  styles.align.self,
+                ]}
+              />
               <Text
                 style={[
                   styles.text.purple,
@@ -126,6 +143,14 @@ export default class Register extends React.Component {
               onChangeText={this.handleChange('password')}
               secureTextEntry={true}
             />
+            <Text
+              style={[
+                styles.margin.top[10],
+                styles.text.purple,
+                styles.font.weight,
+              ]}>
+              {this.state.warn}
+            </Text>
             <View>
               <TouchableOpacity
                 onPress={() => this.submitForm()}

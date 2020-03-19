@@ -8,6 +8,8 @@ import {
   ScrollView,
   Dimensions,
   Alert,
+  StatusBar,
+  Image,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import firebase from 'firebase';
@@ -102,9 +104,18 @@ export default class Login extends React.Component {
   render() {
     return (
       <>
+        <StatusBar backgroundColor="#5a52a5" barStyle="light-content" />
         <ScrollView>
           <View style={[styles.container.center, {minHeight: deviceHeight}]}>
             <View style={[styles.margin.vertical[50]]}>
+              <Image
+                source={require('../../../assets/img/logo-tchat.png')}
+                style={[
+                  styles.width.normal[100],
+                  styles.height.normal[100],
+                  styles.align.self,
+                ]}
+              />
               <Text
                 style={[
                   styles.text.purple,
