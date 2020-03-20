@@ -178,7 +178,7 @@ export default class Map extends Component {
 
   componentDidMount = async () => {
     await this.getUserAll();
-    await this.cek();
+    // await this.cek();
     await this.requestLocationPermission();
     await this.getUserMyFriend();
     await this.yourFriends();
@@ -451,7 +451,7 @@ export default class Map extends Component {
             style={styles.custom.map}
             showsUserLocation
             initialRegion={this.state.initialPosition}>
-            <Polygon coordinates={this.state.coordinates} strokeWidth={0} />
+            {/* <Polygon coordinates={this.state.coordinates} strokeWidth={0} /> */}
             {this.state.coordinates.map((marker, index) => {
               for (let y = 1; y <= this.state.friends.length; y++) {
                 y--;
@@ -459,6 +459,7 @@ export default class Map extends Component {
                   this.state.coordinates[index]['phone'] ===
                   this.state.friends[y]['phone']
                 ) {
+                  console.log(marker);
                   return (
                     <Marker
                       key={marker.phone}

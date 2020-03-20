@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import {Fab, Button, Icon} from 'native-base';
 import firebase from 'firebase';
+import Geolocation from '@react-native-community/geolocation';
 
 import User from '../../../User';
 
@@ -36,7 +37,7 @@ export default class Home extends React.Component {
     };
   }
 
-  componentWillReceiveProps() {
+  UNSAFE_componentWillReceiveProps() {
     this.cek();
   }
 
@@ -44,6 +45,23 @@ export default class Home extends React.Component {
     this.getUserAll();
     this.getUserMyFriend();
     this.getUserMyRequest();
+    this.updateMyLocation();
+  }
+
+  updateMyLocation() {
+    // console.log(this.state.timer);
+    Geolocation.getCurrentPosition(position => {
+      firebase
+        .database()
+        .ref('users')
+        .child(User.phone)
+        .update({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+    });
+    // this.cek();
+    // console.log('update');
   }
 
   cek() {
