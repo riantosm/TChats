@@ -38,7 +38,7 @@ to find out the location of friends. This app was created using React Native, Fi
 
 ## [](https://github.com/riantosm/TChats#screenshots)Screenshots
 
-[![](https://user-images.githubusercontent.com/37394664/76815543-7c383a00-6830-11ea-8b66-fb1c13fe68c4.gif)](https://user-images.githubusercontent.com/37394664/76815543-7c383a00-6830-11ea-8b66-fb1c13fe68c4.gif)
+<!-- [![](https://user-images.githubusercontent.com/37394664/76815543-7c383a00-6830-11ea-8b66-fb1c13fe68c4.gif)](https://user-images.githubusercontent.com/37394664/76815543-7c383a00-6830-11ea-8b66-fb1c13fe68c4.gif) -->
 
 ## [](https://github.com/riantosm/TChats#release-apk-version001)Release APK
 
