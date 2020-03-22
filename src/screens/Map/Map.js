@@ -255,9 +255,12 @@ export default class Map extends Component {
                     style={[
                       styles.custom.cardImage,
                       styles.custom.boxStyleRight,
-                      styles.shadow.md,
                     ]}
-                    source={{uri: this.state.coordinates[x].image}}
+                    source={
+                      this.state.coordinates[x].image
+                        ? {uri: this.state.coordinates[x].image}
+                        : require('../../../assets/img/new_user.png')
+                    }
                   />
                   <View
                     style={[
@@ -459,7 +462,7 @@ export default class Map extends Component {
                   this.state.coordinates[index]['phone'] ===
                   this.state.friends[y]['phone']
                 ) {
-                  console.log(marker);
+                  // console.log(marker);
                   return (
                     <Marker
                       key={marker.phone}
@@ -469,7 +472,12 @@ export default class Map extends Component {
                         latitude: marker.latitude,
                         longitude: marker.longitude,
                       }}>
-                      <Thumbnail source={{uri: marker.image}}></Thumbnail>
+                      <Thumbnail
+                        source={
+                          marker.image
+                            ? {uri: marker.image}
+                            : require('../../../assets/img/new_user.png')
+                        }></Thumbnail>
                       <Callout>
                         <View>
                           <Text style={styles.text.center}>{marker.name}</Text>
