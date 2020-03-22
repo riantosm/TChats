@@ -9,7 +9,6 @@
 -   [Usage](https://github.com/riantosm/TChats#usage-for-development)
 -   [Screenshots](https://github.com/riantosm/TChats#screenshots)
 -   [Release APK](https://github.com/riantosm/TChats#release-apk)
--   [Related Project](https://github.com/riantosm/TChats#related-project-backend)
 
 ## [](https://github.com/riantosm/TChats#introduction)Introduction
 
