@@ -38,10 +38,10 @@ to find out the location of friends. This app was created using React Native, Fi
 
 ## [](https://github.com/riantosm/TChats#screenshots)Screenshots
 
-![WhatsApp Image 2020-03-21 at 12 41 32 PM (1)](https://user-images.githubusercontent.com/59215215/78549667-ef7c0d00-782c-11ea-9ebe-8551d426d5f7.jpeg)
-![WhatsApp Image 2020-03-21 at 12 41 32 PM](https://user-images.githubusercontent.com/59215215/78549673-f1de6700-782c-11ea-98f4-1d1f67e6f0be.jpeg)
-![WhatsApp Image 2020-03-21 at 12 41 32 PM (3)](https://user-images.githubusercontent.com/59215215/78549675-f276fd80-782c-11ea-9299-994565840426.jpeg)
-![WhatsApp Image 2020-03-21 at 12 41 32 PM (2)](https://user-images.githubusercontent.com/59215215/78549680-f30f9400-782c-11ea-961f-0ec0c8dc41f0.jpeg)
+![1](https://user-images.githubusercontent.com/59215215/78550883-120f2580-782f-11ea-9d21-89b9ba233a3f.jpg)
+![1 (1)](https://user-images.githubusercontent.com/59215215/78550885-12a7bc00-782f-11ea-996f-7aa63fe65802.jpg)
+![1 (2)](https://user-images.githubusercontent.com/59215215/78550875-0f143500-782f-11ea-9044-53d0c2de2aad.jpg)
+![1 (3)](https://user-images.githubusercontent.com/59215215/78550880-11768f00-782f-11ea-9d67-176db736177a.jpg)
 
 
 ## [](https://github.com/riantosm/TChats#release-apk-version001)Release APK
