@@ -32,9 +32,9 @@ to find out the location of friends. This app was created using React Native, Fi
 ## [](https://github.com/riantosm/TChats#usage-for-development)Usage for development
 
 1.  Open your terminal or command prompt
-2.  Type  `git clone https://github.com/riantosm/TChats.git`
-3.  Open the folder and type  `npm install`  for install dependencies
-4.  Type  `react-native start && react-native run-android`  for run this app.  _**Make sure your device is connected with debugging mode**_.
+2.  Type  `$ git clone https://github.com/riantosm/TChats.git`
+3.  Open the folder and type  `$ npm install`  for install dependencies
+4.  Type  `$ react-native run-android`  for run this app.  _**Make sure your device is connected with debugging mode**_.
 
 ## [](https://github.com/riantosm/TChats#screenshots)Screenshots
 
